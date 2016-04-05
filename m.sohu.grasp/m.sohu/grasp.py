@@ -64,7 +64,7 @@ def writeCss(url,content):
 			cssfile=file(cssname_new,'w')
 			cssfile.write(css_content)
 			cssfile.close()
-			#change absoute url 
+			#change absoute url
 			content=content.replace(cssurl,cssname_new)
 		except IndexError,e:
 			continue
@@ -95,10 +95,13 @@ def writefileName(url,content):
 				imgname=imgurl[len(re.findall(imgname_pat,imgurl)[0]):len(imgurl)]
 			#print imgurl
 			img_content=urllib2.urlopen(imgurl).read()
-			imgname_new=img_dir+imgname
-			imgfile=file(imgname_new,'w')
-			imgfile.write(img_content)
-			imgfile.close()
+			try:
+				imgname_new=img_dir+imgname
+				imgfile=open(imgname_new,'w')
+				imgfile.write(img_content)
+				imgfile.close()
+			except:
+				pass
 			#change url
 			content=content.replace(imgurl,imgname_new)
 		except IndexError,e:
